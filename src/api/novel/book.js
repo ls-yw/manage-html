@@ -23,3 +23,11 @@ export function deleteNovelBookApi(data) {
     data
   })
 }
+
+export function getNovelChapterPairsApi(params) {
+  return request({
+    url: '/novel/book/chapterPairs',
+    method: 'get',
+    params
+  })
+}

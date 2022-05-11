@@ -7,3 +7,27 @@ export function getNovelArticleListApi(params) {
     params
   })
 }
+
+export function getNovelArticleContentApi(params) {
+  return request({
+    url: '/novel/article/content',
+    method: 'get',
+    params
+  })
+}
+
+export function saveNovelArticleApi(data) {
+  return request({
+    url: '/novel/article/save',
+    method: 'post',
+    data
+  })
+}
+
+export function deleteNovelArticleApi(data) {
+  return request({
+    url: '/novel/article/delete',
+    method: 'post',
+    data
+  })
+}

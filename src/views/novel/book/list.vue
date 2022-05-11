@@ -84,7 +84,7 @@
           <el-input v-model="editObj.intro" type="textarea" :rows="5" />
         </el-form-item>
         <el-form-item label="封面" prop="thumb_img">
-          <upload-file :file-list-data.sync="thumb_img" :limit="1" />
+          <upload-file :file-list-data.sync="thumb_img" project-type="novel" :limit="1" />
         </el-form-item>
         <el-form-item label="采集质量" prop="quality">
           <el-select v-model="editObj.quality" placeholder="请选择">

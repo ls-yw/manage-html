@@ -41,6 +41,10 @@ export default {
       type: String,
       default: 'image'
     },
+    projectType: {
+      type: String,
+      default: ''
+    },
     fileListData: {
       type: Array,
       default() {
@@ -54,7 +58,7 @@ export default {
   },
   data() {
     return {
-      url: '/upload/index',
+      url: '/upload',
       dataParams: {
         type: this.uploadType
       },
@@ -78,7 +82,7 @@ export default {
     }
   },
   created() {
-    this.url = process.env.VUE_APP_BASE_API + '/upload/index'
+    this.url = process.env.VUE_APP_BASE_API + '/upload?type=' + this.projectType
   },
   methods: {
     handleUploadSuccess(res, file, fileList) {
