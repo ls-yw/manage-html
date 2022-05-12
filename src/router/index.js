@@ -93,19 +93,43 @@ export const constantRoutes = [
       {
         path: 'collect',
         name: 'Collect',
-        component: () => import('@/views/novel/collect/list'),
-        meta: { title: '采集管理' }
+        redirect: 'noRedirect',
+        component: () => import('@/views/novel/index'),
+        meta: { title: '采集管理' },
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: () => import('@/views/novel/collect/list'),
+            meta: { title: '采集节点' }
+          },
+          {
+            path: 'book',
+            name: 'Book',
+            component: () => import('@/views/novel/collect/book'),
+            meta: { title: '采集小说' }
+          },
+          {
+            path: 'article',
+            name: 'Article',
+            hidden: true,
+            component: () => import('@/views/novel/collect/article'),
+            meta: { title: '待采集章节', activeMenu: '/novel/collect/book' }
+          }
+        ]
       },
       {
         path: 'member',
         name: 'Member',
-        component: () => import('@/views/novel/member/list'),
+        redirect: 'noRedirect',
+        component: () => import('@/views/novel/index'),
         meta: { title: '会员管理' }
       },
       {
         path: 'data',
         name: 'Data',
-        component: () => import('@/views/novel/data/list'),
+        redirect: 'noRedirect',
+        component: () => import('@/views/novel/index'),
         meta: { title: '数据管理' }
       },
       {

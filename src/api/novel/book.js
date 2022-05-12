@@ -31,3 +31,11 @@ export function getNovelChapterPairsApi(params) {
     params
   })
 }
+
+export function changeNovelBookCollectApi(data) {
+  return request({
+    url: '/novel/book/changeCollect',
+    method: 'post',
+    data
+  })
+}

@@ -105,8 +105,7 @@ export default {
         sort: [{ required: true, message: '排序不能为空', trigger: 'blur' }],
         content: [{ required: true, message: '内容不能为空', trigger: 'blur' }]
       },
-      chapterPairs: [],
-      test: 'aaaa'
+      chapterPairs: []
     }
   },
   created() {
