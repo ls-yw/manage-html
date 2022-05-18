@@ -50,7 +50,7 @@ const actions = {
         const { data } = response
 
         if (!data) {
-          return reject('Verification failed, please Login again.')
+          return reject('获取管理员信息失败，请重新登录')
         }
 
         const { username } = data

@@ -63,7 +63,7 @@
           <el-switch v-model="scope.row.is_collect" :active-value="1" :inactive-value="0" @change="handleCollectStatus(scope.row)" />
         </template>
       </el-table-column>
-      <el-table-column align="center" label="操作" width="210">
+      <el-table-column align="center" label="操作" width="210" fixed="right">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleEdit(scope.row)">
             编辑

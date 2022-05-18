@@ -48,7 +48,7 @@
       </el-table-column>
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
-    <el-dialog :visible.sync="dialogEdit" :title="(editObj.id === 0 ? '添加章节' : '编辑'+'“'+editObj.title+'”')" width="800px" center>
+    <el-dialog :visible.sync="dialogEdit" title="添加章节" width="800px" center>
       <el-form ref="editObj" :rules="rules" :model="editObj" label-position="left" label-width="100px">
         <el-form-item label="文章标题" prop="title">
           <el-input v-model="editObj.title" />
@@ -81,10 +81,13 @@
 <script>
 import Pagination from '@/components/Pagination'
 import { confirmNovelCollectArticleApi, getNovelCollectArticleListApi } from '@/api/novel/collect'
+import { getNovelChapterPairsApi } from '@/api/novel/book'
+import Tinymce from '@/components/Tinymce'
+import { saveNovelArticleApi } from '@/api/novel/article'
 
 export default {
   name: 'Article',
-  components: { Pagination },
+  components: { Pagination, Tinymce },
   data() {
     return {
       list: null,
@@ -103,10 +106,12 @@ export default {
         sort: [{ required: true, message: '排序不能为空', trigger: 'blur' }],
         content: [{ required: true, message: '内容不能为空', trigger: 'blur' }]
       },
-      multipleSelection: []
+      multipleSelection: [],
+      chapterPairs: []
     }
   },
   created() {
+    this.getChapterPairs()
     this.getList()
   },
   methods: {
@@ -116,6 +121,11 @@ export default {
         this.list = response.list
         this.total = response.total
         this.listLoading = false
+      })
+    },
+    getChapterPairs() {
+      getNovelChapterPairsApi(this.listQuery).then(response => {
+        this.chapterPairs = response.data
       })
     },
     handleSelectionChange(val) {
@@ -148,6 +158,36 @@ export default {
       this.multipleSelection = []
       this.multipleSelection.push(row)
       this.handleBatchCollected()
+    },
+    handleAdd(row) {
+      this.dialogEdit = true
+      this.editObj = {
+        title: row.from_title,
+        sort: row.from_sort,
+        chapter_id: this.chapterPairs[0].value,
+        book_id: this.$route.query.bookId,
+        collect_from_id: row.id
+      }
+      this.$refs.tin.setContent('')
+    },
+    handleSave() {
+      this.$refs.editObj.clearValidate()
+      this.$refs.editObj.validate(valid => {
+        if (valid) {
+          saveNovelArticleApi(this.editObj).then(response => {
+            if (response.code === 0) {
+              this.$message.success('保存成功')
+              this.dialogEdit = false
+              this.getList()
+            } else {
+              this.$message.error(response.msg)
+            }
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     }
   }
 }

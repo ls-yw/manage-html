@@ -39,3 +39,27 @@ export function changeNovelBookCollectApi(data) {
     data
   })
 }
+
+export function getNovelBookApplyListApi(params) {
+  return request({
+    url: '/novel/book/apply',
+    method: 'get',
+    params
+  })
+}
+
+export function saveNovelBookApplyReplyApi(data) {
+  return request({
+    url: '/novel/book/replyApply',
+    method: 'post',
+    data
+  })
+}
+
+export function deleteNovelBookApplyApi(data) {
+  return request({
+    url: '/novel/book/deleteApply',
+    method: 'post',
+    data
+  })
+}

@@ -123,14 +123,48 @@ export const constantRoutes = [
         name: 'Member',
         redirect: 'noRedirect',
         component: () => import('@/views/novel/index'),
-        meta: { title: '会员管理' }
+        meta: { title: '会员管理' },
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: () => import('@/views/novel/member/list'),
+            meta: { title: '会员列表' }
+          },
+          {
+            path: 'apply',
+            name: 'Apply',
+            component: () => import('@/views/novel/book/apply'),
+            meta: { title: '收录申请' }
+          },
+          {
+            path: 'book',
+            name: 'Book',
+            component: () => import('@/views/novel/member/book'),
+            meta: { title: '会员书架' }
+          }
+        ]
       },
       {
         path: 'data',
         name: 'Data',
         redirect: 'noRedirect',
         component: () => import('@/views/novel/index'),
-        meta: { title: '数据管理' }
+        meta: { title: '数据管理' },
+        children: [
+          {
+            path: 'keywords',
+            name: 'Keywords',
+            component: () => import('@/views/novel/data/keywords'),
+            meta: { title: '搜索关键字' }
+          },
+          {
+            path: 'apply',
+            name: 'Apply',
+            component: () => import('@/views/novel/book/apply'),
+            meta: { title: '搜索引擎来源' }
+          }
+        ]
       },
       {
         path: 'setting',
