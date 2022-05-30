@@ -65,6 +65,9 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="210" fixed="right">
         <template slot-scope="scope">
+          <el-button v-if="scope.row.is_collect === 1" type="success" size="mini" @click="handleCollect(scope.row)">
+            采集
+          </el-button>
           <el-button type="primary" size="mini" @click="handleEdit(scope.row)">
             编辑
           </el-button>
@@ -135,6 +138,13 @@ export default {
         row.is_collect = row.is_collect === 1 ? 0 : 1
         this.listLoading = false
       })
+    },
+    handleCollect(row) {
+      this.$router.push({ path: '/novel/collect/do', query: { bookId: row.id }})
+    },
+    handleSearch() {
+      this.listQuery.page = 1
+      this.getList()
     }
   }
 }
