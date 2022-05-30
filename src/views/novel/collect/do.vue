@@ -1,12 +1,16 @@
 <template>
   <el-row class="container">
-    <el-col v-for="(item,index) in contents" :key="index" :span="item.type && item.type === 'row' ? 24 : 4" :class="'list '+item.class">{{ item.message }}</el-col>
+    <el-col v-for="(item,index) in contents" :key="index" :span="item.type && item.type === 'row' ? 24 : 4" :class="'list '+item.class">
+      <div v-if="item.data && item.data.from_id"><a :href="item.data.from_url" target="_blank">{{ item.message }}</a> [<span class="orange" @click="handleConfirmCollect(item.data, $event)">确认</span>] [<a href="" class="green"> 添加</a>]</div>
+      <div v-else> {{ item.message }}</div>
+    </el-col>
   </el-row>
 </template>
 
 <script>
 import ReconnectingWebSocket from 'reconnecting-websocket'
 import { getToken } from '@/utils/auth'
+import { confirmNovelCollectArticleApi } from '@/api/novel/collect'
 
 export default {
   name: 'Do',
@@ -80,6 +84,16 @@ export default {
     },
     goCollect() {
       this.websocket.send('{ "action":"collectArticle", "bookId": "' + this.bookId + '" }')
+    },
+    handleConfirmCollect(row, event) {
+      const e = event.currentTarget
+      if (e.className !== 'gray') {
+        confirmNovelCollectArticleApi({ ids: [row.from_id] }).then(response => {
+          this.$message.success('确认成功')
+          e.className = 'gray'
+          e.innerHTML = '已确认'
+        })
+      }
     }
   }
 }
