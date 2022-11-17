@@ -60,7 +60,14 @@ export default {
     websocketOnmessage(event) {
       const result = JSON.parse(event.data)
       if (result.code === 0) {
-        this.contents.push(result)
+        this.contents.unshift(result)
+        if (result.data && result.data.action) {
+          switch (result.data.action) {
+            case 'closed':
+              this.closeWebSocket()
+              break
+          }
+        }
       } else if (result.code === 200) {
         this.$message.success(result.message)
         return false

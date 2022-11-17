@@ -31,3 +31,11 @@ export function deleteNovelArticleApi(data) {
     data
   })
 }
+
+export function clearNovelArticleApi(data) {
+  return request({
+    url: '/novel/article/clear',
+    method: 'post',
+    data
+  })
+}

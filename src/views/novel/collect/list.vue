@@ -1,6 +1,10 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
+      状态：
+      <el-select v-model="listQuery.collectStatus" style="width: 90px" class="filter-item" @change="getList">
+        <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
       <el-button class="filter-item" size="mini" type="primary" @click="handleAdd">
         添加节点
       </el-button>
@@ -139,7 +143,8 @@ export default {
       total: 0,
       listQuery: {
         page: 1,
-        size: 20
+        size: 20,
+        collectStatus: 1
       },
       listLoading: true,
       editObj: {},
@@ -161,7 +166,21 @@ export default {
       collectBookDialog: false,
       collectInfoLoading: false,
       saveCollectInfoLoading: false,
-      categoryPairs: []
+      categoryPairs: [],
+      statusOptions: [
+        {
+          value: 99,
+          label: '全部'
+        },
+        {
+          value: 1,
+          label: '可采集'
+        },
+        {
+          value: 0,
+          label: '不可采集'
+        }
+      ]
     }
   },
   created() {
@@ -253,8 +272,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .filter-container{
     margin-bottom: 10px;
+    .filter-item {
+        margin-right: 10px;
+    }
 }
 </style>

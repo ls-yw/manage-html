@@ -81,6 +81,12 @@ export const novelRouter = {
           hidden: true,
           component: () => import('@/views/novel/collect/test'),
           meta: { title: '采集测试', activeMenu: '/novel/collect/list' }
+        },
+        {
+          path: 'jbkssq',
+          name: 'app',
+          component: () => import('@/views/novel/collect/app'),
+          meta: { title: 'APP采集' }
         }
       ]
     },

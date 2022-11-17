@@ -47,7 +47,14 @@
                 <span class="red">暂只支持一步运算</span></el-col>
             </el-form-item>
           </el-col>
-          <el-col :span="12" />
+          <el-col :span="12">
+            <el-form-item label="目标类型" prop="target_type">
+              <el-radio-group v-model="collectObj.target_type">
+                <el-radio :label="1">web</el-radio>
+                <el-radio :label="2">app</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
