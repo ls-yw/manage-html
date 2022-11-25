@@ -6,6 +6,7 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import { novelRouter } from '@/router/novel'
+import { blogRouter } from '@/router/blog'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -54,8 +55,19 @@ export const constantRoutes = [
       meta: { title: '控制台', icon: 'dashboard' }
     }]
   },
+  blogRouter,
   novelRouter,
-
+  {
+    path: '/setting',
+    component: Layout,
+    redirect: '/setting',
+    children: [{
+      path: '/setting',
+      name: 'setting',
+      component: () => import('@/views/config/index'),
+      meta: { title: '系统配置', icon: 'setting' }
+    }]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

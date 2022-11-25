@@ -62,7 +62,7 @@
           <el-input v-model="editObj.sort" />
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <tinymce ref="tin" v-model="editObj.content" />
+          <ck-editor ref="editor" v-model="editObj.content" />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -82,11 +82,11 @@ import {
 } from '@/api/novel/article'
 import Pagination from '@/components/Pagination'
 import { getNovelChapterPairsApi } from '@/api/novel/book'
-import Tinymce from '@/components/Tinymce'
+import CkEditor from '@/components/CkEditor'
 
 export default {
   name: 'List',
-  components: { Pagination, Tinymce },
+  components: { CkEditor, Pagination },
   data() {
     return {
       list: null,
@@ -145,7 +145,7 @@ export default {
         if (response.code === 0) {
           this.editObj.content = response.data
           this.dialogEdit = true
-          this.$refs.tin.setContent(this.editObj.content)
+          // this.$refs.tin.setContent(this.editObj.content)
           this.$nextTick(() => {
             this.$refs['editObj'].clearValidate()
           })
@@ -204,5 +204,10 @@ export default {
 <style scoped>
 .filter-container{
     margin-bottom: 10px;
+}
+</style>
+<style lang="scss" >
+.ck-editor__editable {
+    max-height: 600px;
 }
 </style>
