@@ -137,12 +137,6 @@ export const novelRouter = {
           meta: { title: '搜索引擎来源' }
         }
       ]
-    },
-    {
-      path: 'setting',
-      name: 'Setting',
-      component: () => import('@/views/novel/setting'),
-      meta: { title: '系统设置' }
     }
   ]
 }

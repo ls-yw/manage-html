@@ -34,12 +34,6 @@ export const blogRouter = {
           meta: { title: '编辑文章', activeMenu: '/blog/article/list' }
         }
       ]
-    },
-    {
-      path: 'config',
-      name: 'config',
-      component: () => import('@/views/blog/setting'),
-      meta: { title: '系统配置' }
     }
   ]
 }
